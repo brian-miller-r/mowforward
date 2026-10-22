@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Lawn Care Businesses — MowForward</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="business">
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+          <circle cx="15" cy="15" r="14" fill="#2f7d3a"/>
+          <path d="M8 20 L15 8 L22 20 Z" fill="#faf8f1"/>
+          <rect x="13.5" y="18" width="3" height="6" rx="1" fill="#faf8f1"/>
+        </svg>
+        MowForward
+      </a>
+      <nav class="site-nav">
+        <a href="family.html">For Families</a>
+        <a href="business.html">For Businesses</a>
+        <a href="index.html#impact">Impact</a>
+      </nav>
+    </div>
+  </header>
+
+  <aside class="prototype-banner" aria-label="Prototype notice">
+    <div class="wrap">Challenge prototype - sample data stays in this browser. Please do not enter real addresses, gate codes, or deployment information.</div>
+  </aside>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>For lawn care businesses</h1>
+      <p>You're already driving these neighborhoods. One extra stop &mdash; about 30 minutes &mdash;
+         is a free mow for a military family and the best advertising you'll never pay for.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <!-- shown until the business signs up -->
+      <div id="biz-signup-view" class="grid-2">
+        <div class="card">
+          <h3>Join as a partner business</h3>
+          <form id="biz-form">
+            <div class="field">
+              <label for="bf-company">Company name</label>
+              <input id="bf-company" required placeholder="e.g. GreenStripe Lawn Co.">
+            </div>
+            <div class="field">
+              <label for="bf-contact">Your name</label>
+              <input id="bf-contact" required autocomplete="name" placeholder="e.g. Mike Delgado">
+            </div>
+            <div class="field">
+              <label for="bf-email">Email</label>
+              <input id="bf-email" type="email" required autocomplete="email" placeholder="you@company.com">
+            </div>
+            <div class="field">
+              <label for="bf-phone">Phone <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+              <input id="bf-phone" type="tel" autocomplete="tel" placeholder="757-555-0100">
+            </div>
+            <div class="field">
+              <label for="bf-zips">ZIP codes you serve</label>
+              <input id="bf-zips" required placeholder="23456, 23452, 23464">
+              <div class="hint">Comma-separated. You'll only see requests in these ZIPs.</div>
+            </div>
+            <div class="field">
+              <label for="bf-crew">Number of crews</label>
+              <input id="bf-crew" type="number" min="1" value="1" required>
+            </div>
+            <button class="btn" type="submit">Join MowForward</button>
+          </form>
+        </div>
+        <div class="card">
+          <h3>Why businesses join</h3>
+          <p><strong>Near-zero cost.</strong> Requests are matched to ZIPs you already serve &mdash; donations piggyback on routes you're already driving.</p>
+          <p><strong>Real visibility.</strong> Every completed mow lands on the public Impact Board with your company name.</p>
+          <p><strong>Community trust.</strong> Military families talk. Being the company that showed up earns customers for years.</p>
+          <p class="hint">This challenge prototype uses sample data in one browser. A real pilot would add verified accounts and secure post-claim communication.</p>
+        </div>
+      </div>
+
+      <!-- shown after signup -->
+      <div id="biz-dash-view" class="hidden">
+        <h2 id="biz-greeting">Welcome</h2>
+        <p class="lede">Open requests in your service area &mdash; claim one with a single click.</p>
+        <p id="biz-status-message" class="status-message hidden" role="status"></p>
+
+        <h3 style="margin-top:32px;">Near my jobs</h3>
+        <ul id="nearby-list" class="req-list"></ul>
+
+        <h3 style="margin-top:32px;">My claimed jobs</h3>
+        <ul id="my-jobs" class="req-list"></ul>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        Built by Henry Miller for the 2026 Congressional App Challenge &middot; Virginia&rsquo;s 2nd District<br>
+        <span style="font-size:0.8rem;">Prototype &mdash; demo data is stored in your browser. <button class="btn-ghost reset-demo" style="color:#9fb0c3">Reset demo data</button></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js?v=20261022"></script>
+</body>
+</html>

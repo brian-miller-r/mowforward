@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>For Military Families — MowForward</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body data-page="family">
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="index.html">
+        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
+          <circle cx="15" cy="15" r="14" fill="#2f7d3a"/>
+          <path d="M8 20 L15 8 L22 20 Z" fill="#faf8f1"/>
+          <rect x="13.5" y="18" width="3" height="6" rx="1" fill="#faf8f1"/>
+        </svg>
+        MowForward
+      </a>
+      <nav class="site-nav">
+        <a href="family.html">For Families</a>
+        <a href="business.html">For Businesses</a>
+        <a href="index.html#impact">Impact</a>
+      </nav>
+    </div>
+  </header>
+
+  <aside class="prototype-banner" aria-label="Prototype notice">
+    <div class="wrap">Challenge prototype - sample data stays in this browser. Please do not enter real addresses, gate codes, or deployment information.</div>
+  </aside>
+
+  <section class="page-hero">
+    <div class="wrap">
+      <h1>For military families</h1>
+      <p>Spouse deployed? Sign up in under three minutes, post your lawn, and let a local
+         business donate the mow. Free, always.</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+
+      <!-- shown until the family signs up -->
+      <div id="family-signup-view" class="grid-2">
+        <div class="card">
+          <h3>1 &middot; Create your family profile</h3>
+          <form id="family-form">
+            <div class="field">
+              <label for="ff-name">Your name</label>
+              <input id="ff-name" required autocomplete="name" placeholder="e.g. Sarah Mitchell">
+            </div>
+            <div class="field">
+              <label for="ff-email">Email</label>
+              <input id="ff-email" type="email" required autocomplete="email" placeholder="you@example.com">
+            </div>
+            <div class="field">
+              <label for="ff-phone">Phone <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
+              <input id="ff-phone" type="tel" autocomplete="tel" placeholder="757-555-0100">
+            </div>
+            <div class="field">
+              <label for="ff-branch">Spouse's branch of service</label>
+              <select id="ff-branch" required>
+                <option value="">Choose&hellip;</option>
+                <option>Army</option><option>Navy</option><option>Air Force</option>
+                <option>Marine Corps</option><option>Space Force</option><option>Coast Guard</option>
+              </select>
+            </div>
+            <div class="field check-row">
+              <input id="ff-attest" type="checkbox" required>
+              <label for="ff-attest" style="font-weight:400">I am the spouse of an actively deployed service member.</label>
+            </div>
+            <button class="btn" type="submit">Create profile</button>
+          </form>
+        </div>
+        <div class="card">
+          <h3>How it works for you</h3>
+          <p><strong>1.</strong> Create your profile (this page).</p>
+          <p><strong>2.</strong> Post your lawn with your ZIP code &mdash; only your ZIP is ever shown publicly.</p>
+          <p><strong>3.</strong> A local business claims your request. You&rsquo;ll see exactly who&rsquo;s coming.</p>
+          <p><strong>4.</strong> Your lawn gets mowed. Free.</p>
+          <p class="hint" style="color:var(--muted); font-size:0.9rem;">For this demo, do not enter an address, gate code, or other private property information.</p>
+        </div>
+      </div>
+
+      <!-- shown after signup -->
+      <div id="family-dash-view" class="hidden">
+        <h2 id="family-greeting">Welcome</h2>
+        <p id="family-status-message" class="status-message hidden" role="status"></p>
+        <div class="grid-2">
+          <div id="request-card" class="card">
+            <h3>Request a mow</h3>
+            <form id="request-form">
+              <div class="field">
+                <label for="rf-zip">ZIP code</label>
+                <input id="rf-zip" required inputmode="numeric" pattern="[0-9]{5}" placeholder="23456">
+              </div>
+              <div class="field">
+                <label for="rf-size">Lawn size</label>
+                <select id="rf-size" required>
+                  <option value="">Choose&hellip;</option>
+                  <option>Small (townhouse / small lot)</option>
+                  <option>Medium (typical suburban lot)</option>
+                  <option>Large (corner lot / acreage)</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="rf-last">Last mowed (approx.)</label>
+                <input id="rf-last" type="date" required>
+              </div>
+              <div class="field">
+                <label for="rf-days">Preferred days</label>
+                <input id="rf-days" placeholder="e.g. Thu or Fri afternoons">
+              </div>
+              <div class="field">
+                <label for="rf-notes">Notes for the crew</label>
+                <textarea id="rf-notes" placeholder="Lawn access preference or other non-sensitive detail&hellip;"></textarea>
+                <div class="hint">Shown only after a business claims the request. Do not include a gate code or address in this prototype.</div>
+              </div>
+              <button class="btn" type="submit">Post my request</button>
+            </form>
+          </div>
+          <div>
+            <h3>My requests</h3>
+            <ul id="family-requests" class="req-list"></ul>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div>
+        Built by Henry Miller for the 2026 Congressional App Challenge &middot; Virginia&rsquo;s 2nd District<br>
+        <span style="font-size:0.8rem;">Prototype &mdash; demo data is stored in your browser. <button class="btn-ghost reset-demo" style="color:#9fb0c3">Reset demo data</button></span>
+      </div>
+    </div>
+  </footer>
+
+  <script src="app.js?v=20261022"></script>
+</body>
+</html>
