@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D MISSION MINIGAME | Mission Mow</title>
+  <meta name="description" content="Drive a mower across Mission Mow's 3D lawn minigame using WASD.">
+  <link rel="stylesheet" href="styles.css?v=20261023a">
+</head>
+<body data-page="minigame">
+  <div class="official-bar"><div class="site-width"><span class="flag-mark" aria-hidden="true"></span> A community-service platform for military families</div></div>
+
+  <main class="site-width page-shell">
+    <header class="masthead">
+      <a class="wordmark" href="index.html"><span class="wordmark-mark" aria-hidden="true">↗</span> Mission Mow</a>
+      <nav class="mast-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="family.html">Families</a><a href="business.html">Businesses</a><a href="minigame.html" aria-current="page">MISSION MINIGAME</a></nav>
+    </header>
+
+    <section class="game-heading">
+      <p class="eyebrow red" data-edit-key="minigame.heading.eyebrow" data-edit-label="Minigame label">A quick neighborhood challenge</p>
+      <h1 data-edit-key="minigame.heading.title" data-edit-label="Minigame headline">MISSION MINIGAME</h1>
+      <p data-edit-key="minigame.heading.lede" data-edit-label="Minigame description">Drive the mower across a 3D lawn and cut every tall-grass patch before the clock expires.</p>
+    </section>
+
+    <section class="game-section" aria-labelledby="game-title">
+      <div class="game-topline">
+        <div><p class="eyebrow" data-edit-key="minigame.route.eyebrow" data-edit-label="Minigame route label">Your route</p><h2 id="game-title" data-edit-key="minigame.route.title" data-edit-label="Minigame route heading">Drive your mower through the tall grass.</h2></div>
+        <div class="game-scoreboard" aria-label="Game score"><span>PATCHES MOWED <strong id="game-score">0</strong></span><span>TIME <strong id="game-time">90</strong></span></div>
+      </div>
+
+      <div class="game-board-wrap">
+        <canvas id="mowing-game" class="mission-game-canvas" width="960" height="510" aria-label="3D mowing game. Use W and S to drive and A and D to steer.">Your browser does not support this game canvas.</canvas>
+      </div>
+
+      <div class="game-controls">
+        <div class="keyboard-guide" aria-label="Keyboard controls"><span class="keycap">W</span><span class="keycap">A</span><span class="keycap">S</span><span class="keycap">D</span><span>Drive and steer the mower</span></div>
+        <button id="game-start" class="primary-button" type="button">Start mission <span aria-hidden="true">→</span></button>
+      </div>
+      <p id="game-status" class="game-status" role="status" aria-live="polite">Press Start mission, then use WASD to drive.</p>
+      <p class="game-note">This is just for fun — the minigame score does not change the community impact board.</p>
+    </section>
+
+    <footer class="site-footer-v2"><span>Built by Henry Miller for the 2026 Congressional App Challenge</span><a class="text-link game-home-link" href="index.html">Back to Mission Mow <span aria-hidden="true">→</span></a></footer>
+  </main>
+
+  <script src="minigame.js?v=20261022f"></script>
+</body>
+</html>

@@ -3,111 +3,75 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>For Lawn Care Businesses — MowForward</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>Mission Mow | Business partners</title>
+  <link rel="stylesheet" href="styles.css?v=20261023a">
 </head>
-<body data-page="business">
+<body data-page="business" data-storage-namespace="mission_mow">
+  <div class="official-bar"><div class="site-width"><span class="flag-mark" aria-hidden="true"></span> A community-service platform for military families</div></div>
+  <main class="site-width page-shell">
+    <header class="masthead">
+      <a class="wordmark" href="index.html"><span class="wordmark-mark" aria-hidden="true">↗</span> Mission Mow</a>
+      <nav class="mast-nav" aria-label="Primary navigation"><a href="index.html">Home</a><a href="family.html">Families</a><a href="business.html">Businesses</a><a href="minigame.html">MISSION MINIGAME</a></nav>
+    </header>
 
-  <header class="site-header">
-    <div class="wrap">
-      <a class="brand" href="index.html">
-        <svg width="30" height="30" viewBox="0 0 30 30" fill="none" aria-hidden="true">
-          <circle cx="15" cy="15" r="14" fill="#2f7d3a"/>
-          <path d="M8 20 L15 8 L22 20 Z" fill="#faf8f1"/>
-          <rect x="13.5" y="18" width="3" height="6" rx="1" fill="#faf8f1"/>
-        </svg>
-        MowForward
-      </a>
-      <nav class="site-nav">
-        <a href="family.html">For Families</a>
-        <a href="business.html">For Businesses</a>
-        <a href="index.html#impact">Impact</a>
-      </nav>
-    </div>
-  </header>
+    <section class="page-heading">
+      <p class="eyebrow red" data-edit-key="business.heading.eyebrow" data-edit-label="Businesses page label">For lawn care businesses</p>
+      <h1 data-edit-key="business.heading.title" data-edit-label="Businesses page headline">Make room for one more stop.</h1>
+      <p data-edit-key="business.heading.lede" data-edit-label="Businesses page description">Claim a nearby request on a route you already serve and turn a normal workday into meaningful community support.</p>
+    </section>
 
-  <aside class="prototype-banner" aria-label="Prototype notice">
-    <div class="wrap">Challenge prototype - sample data stays in this browser. Please do not enter real addresses, gate codes, or deployment information.</div>
-  </aside>
+    <section id="biz-signup-view" class="two-column">
+      <form id="biz-form" class="form-panel">
+        <p class="eyebrow" data-edit-key="business.profile.eyebrow" data-edit-label="Business profile label">Step 1</p>
+        <h2 data-edit-key="business.profile.title" data-edit-label="Business profile heading">Join as a partner business</h2>
+        <div class="field"><label for="bf-company">Company name</label><input id="bf-company" required placeholder="e.g. GreenStripe Lawn Co."></div>
+        <div class="field"><label for="bf-contact">Your name</label><input id="bf-contact" required autocomplete="name" placeholder="e.g. Mike Delgado"></div>
+        <div class="field"><label for="bf-email">Email</label><input id="bf-email" type="email" required autocomplete="email" placeholder="you@company.com"></div>
+        <div class="field"><label for="bf-phone">Phone <span>(optional)</span></label><input id="bf-phone" type="tel" autocomplete="tel" placeholder="757-555-0100"></div>
+        <div class="field"><label for="bf-zips">ZIP codes you serve</label><input id="bf-zips" required placeholder="23456, 23452, 23464"><small>Separate five-digit ZIP codes with commas.</small></div>
+        <div class="field"><label for="bf-crew">Number of crews</label><input id="bf-crew" type="number" min="1" value="1" required></div>
+        <button class="primary-button" type="submit">Join Mission Mow <span aria-hidden="true">→</span></button>
+      </form>
+      <aside class="info-panel dark-info">
+        <p class="eyebrow" data-edit-key="business.principle.eyebrow" data-edit-label="Business principle label">One principle</p>
+        <h2 data-edit-key="business.principle.title" data-edit-label="Business principle heading">Local routes make local generosity easier.</h2>
+        <p>Mission Mow does not ask a crew to cross town. It highlights a family request in the ZIP codes the business has already chosen to serve.</p>
+        <blockquote class="partner-quote">&ldquo;Their service did not end when they took off their uniform&hellip; it&rsquo;s only fitting that we recognize their ongoing contribution to our community.&rdquo;<span>&mdash; Congresswoman Jen Kiggans (VA-02)</span></blockquote>
+        <p class="small-note">Mission Mow is designed to use verified accounts and secure communication.</p>
+      </aside>
+    </section>
 
-  <section class="page-hero">
-    <div class="wrap">
-      <h1>For lawn care businesses</h1>
-      <p>You're already driving these neighborhoods. One extra stop &mdash; about 30 minutes &mdash;
-         is a free mow for a military family and the best advertising you'll never pay for.</p>
-    </div>
-  </section>
-
-  <section class="section">
-    <div class="wrap">
-
-      <!-- shown until the business signs up -->
-      <div id="biz-signup-view" class="grid-2">
-        <div class="card">
-          <h3>Join as a partner business</h3>
-          <form id="biz-form">
-            <div class="field">
-              <label for="bf-company">Company name</label>
-              <input id="bf-company" required placeholder="e.g. GreenStripe Lawn Co.">
-            </div>
-            <div class="field">
-              <label for="bf-contact">Your name</label>
-              <input id="bf-contact" required autocomplete="name" placeholder="e.g. Mike Delgado">
-            </div>
-            <div class="field">
-              <label for="bf-email">Email</label>
-              <input id="bf-email" type="email" required autocomplete="email" placeholder="you@company.com">
-            </div>
-            <div class="field">
-              <label for="bf-phone">Phone <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
-              <input id="bf-phone" type="tel" autocomplete="tel" placeholder="757-555-0100">
-            </div>
-            <div class="field">
-              <label for="bf-zips">ZIP codes you serve</label>
-              <input id="bf-zips" required placeholder="23456, 23452, 23464">
-              <div class="hint">Comma-separated. You'll only see requests in these ZIPs.</div>
-            </div>
-            <div class="field">
-              <label for="bf-crew">Number of crews</label>
-              <input id="bf-crew" type="number" min="1" value="1" required>
-            </div>
-            <button class="btn" type="submit">Join MowForward</button>
-          </form>
+    <section class="business-sign-feature" aria-labelledby="business-sign-heading">
+      <div class="business-sign-copy">
+        <p class="eyebrow red">Partner benefit</p>
+        <h2 id="business-sign-heading">Make a generous stop visible in the neighborhood.</h2>
+        <p>Every completed Mission Mow can include a yard sign that gives credit to the lawn care business and makes Mission Mow easier for the next family or crew to find.</p>
+        <p class="small-note">Shown here with a sample partner name. The final sign would carry each business&rsquo;s own branding.</p>
+      </div>
+      <div class="business-sign-stage" aria-label="Mission Mow yard sign design mockup">
+        <div class="yard-sign-mock">
+          <span class="sign-mock-kicker">Lawn cared for by</span>
+          <strong>GreenStripe<br>Lawn Co.</strong>
+          <span class="sign-mock-divider"></span>
+          <b><i aria-hidden="true">↗</i> MISSION MOW</b>
+          <small>Neighbors supporting military families</small>
         </div>
-        <div class="card">
-          <h3>Why businesses join</h3>
-          <p><strong>Near-zero cost.</strong> Requests are matched to ZIPs you already serve &mdash; donations piggyback on routes you're already driving.</p>
-          <p><strong>Real visibility.</strong> Every completed mow lands on the public Impact Board with your company name.</p>
-          <p><strong>Community trust.</strong> Military families talk. Being the company that showed up earns customers for years.</p>
-          <p class="hint">This challenge prototype uses sample data in one browser. A real pilot would add verified accounts and secure post-claim communication.</p>
-        </div>
+        <span class="sign-stake sign-stake-left" aria-hidden="true"></span><span class="sign-stake sign-stake-right" aria-hidden="true"></span>
       </div>
+    </section>
 
-      <!-- shown after signup -->
-      <div id="biz-dash-view" class="hidden">
-        <h2 id="biz-greeting">Welcome</h2>
-        <p class="lede">Open requests in your service area &mdash; claim one with a single click.</p>
-        <p id="biz-status-message" class="status-message hidden" role="status"></p>
-
-        <h3 style="margin-top:32px;">Near my jobs</h3>
-        <ul id="nearby-list" class="req-list"></ul>
-
-        <h3 style="margin-top:32px;">My claimed jobs</h3>
-        <ul id="my-jobs" class="req-list"></ul>
+    <section id="biz-dash-view" class="hidden">
+      <div class="dash-heading"><div><p class="eyebrow red">Business dashboard</p><h1 id="biz-greeting">Welcome</h1></div><a class="text-link" href="index.html#impact">View community impact <span aria-hidden="true">→</span></a></div>
+      <p class="dash-lede">Open requests in your service ZIPs. Claim one when it fits your route.</p>
+      <p id="biz-status-message" class="status-message hidden" role="status"></p>
+      <div class="dashboard-stack">
+        <section class="request-panel"><p class="eyebrow">Requests near your routes</p><h2>Available to claim</h2><ul id="nearby-list" class="req-list"></ul></section>
+        <section class="request-panel"><p class="eyebrow">Your next steps</p><h2>Claimed jobs</h2><ul id="my-jobs" class="req-list"></ul></section>
       </div>
+    </section>
 
-    </div>
-  </section>
-
-  <footer class="site-footer">
-    <div class="wrap">
-      <div>
-        Built by Henry Miller for the 2026 Congressional App Challenge &middot; Virginia&rsquo;s 2nd District<br>
-        <span style="font-size:0.8rem;">Prototype &mdash; demo data is stored in your browser. <button class="btn-ghost reset-demo" style="color:#9fb0c3">Reset demo data</button></span>
-      </div>
-    </div>
-  </footer>
-
-  <script src="app.js?v=20261022"></script>
+    <footer class="site-footer-v2"><span>Built for the 2026 Congressional App Challenge.</span></footer>
+  </main>
+  <script src="app.js?v=20261023b"></script>
 </body>
 </html>

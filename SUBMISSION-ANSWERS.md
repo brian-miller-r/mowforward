@@ -1,7 +1,7 @@
-# MowForward — Written Submission Answers (draft)
+# Mission Mow — Written Submission Answers (draft)
 
 The submission form at congressionalappchallenge.us asks for written answers
-alongside the app and the demo video. Draft answers below — all factual ones
+alongside the app and the video walkthrough. Draft answers below — all factual ones
 are grounded in the PRD. **Henry: do not copy these word-for-word.**
 Judges read hundreds of entries and they want *your* voice. Rewrite each one
 in your own words before submitting — the facts stay, the sentences change.
@@ -16,16 +16,16 @@ after submitting — one per teammate.
 
 ## 1. App name
 
-MowForward
+Mission Mow
 
 ## 2. Programming language(s)
 
 HTML, CSS, and JavaScript. All the data is stored in the browser using
-localStorage, so the demo runs with no backend and no server.
+localStorage, so the site runs with no backend and no server.
 
 ## 3. One-sentence purpose
 
-MowForward is a website where local lawn care businesses donate lawn
+Mission Mow is a website where local lawn care businesses donate lawn
 service to military families while a spouse is deployed — matched by ZIP
 code to crews already working in that neighborhood, so one extra stop
 costs them about 20–30 minutes.
@@ -66,7 +66,7 @@ wanted to build something that helps a community I actually live in.
 Honest list — judges respect knowing the limits of an MVP:
 
 - **A real backend** (e.g., Firebase or Supabase) instead of localStorage, so
-  families and businesses share live data instead of demo data on one browser.
+  families and businesses share live data instead of data on one browser.
 - **Real military-status verification** — MVP uses self-attestation; the real
   version would partner with existing military spouse organizations so no one
   can falsely claim the benefit.
@@ -77,7 +77,7 @@ Honest list — judges respect knowing the limits of an MVP:
   follow through.
 - **Recurring scheduling** — deployments last 6–9 months; one donated mow is
   great, a standing commitment is better.
-- None of the above moves money: MowForward is donations only, no payments
+- None of the above moves money: Mission Mow is donations only, no payments
   ever pass through the app.
 
 ---
@@ -86,7 +86,7 @@ Honest list — judges respect knowing the limits of an MVP:
 
 - [ ] Henry rewrites answers 5 and 6 (and 3, 4, 7) in his own words
 - [ ] Register both teammates at congressionalappchallenge.us
-- [ ] Record the demo video using DEMO-VIDEO-SCRIPT.md (Fri 10/23 at latest)
+- [ ] Record the video walkthrough using VIDEO-WALKTHROUGH-SCRIPT.md (Fri 10/23 at latest)
 - [ ] Upload video to YouTube/Vimeo, set to PUBLIC, verify the link plays
       in a logged-out browser
 - [ ] Submit the morning of Monday 10/26 — app + video + these answers

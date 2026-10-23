@@ -1,6 +1,6 @@
-# MowForward — PRD & Business Case
+# Mission Mow — PRD & Business Case
 
-**Working title:** MowForward
+**Working title:** Mission Mow
 **One-liner:** A two-sided web platform where local lawn care businesses donate lawn service to military families while a spouse is deployed — matched by neighborhood, so a crew already on a nearby job can stop by and help.
 
 **Authors:** Henry Miller (builder) + Brian Miller (co-pilot)
@@ -21,7 +21,7 @@ Meanwhile, local lawn care crews are *already driving through these neighborhood
 
 ## 2. The Idea
 
-MowForward is a two-sided marketplace for **donated lawn care**:
+Mission Mow is a two-sided marketplace for **donated lawn care**:
 
 - **Side A — Military families:** A spouse of a deployed service member signs up, verifies eligibility, and posts a lawn-care request (address/ZIP, lawn size, how urgent).
 - **Side B — Lawn care businesses:** A local company signs up, lists the ZIP codes it serves, and sees open requests **near its current jobs**. When a crew is already in the neighborhood, one extra stop costs them 20–30 minutes — and earns them community goodwill, visibility, and reviews.
@@ -49,7 +49,7 @@ The matching insight: donations happen *opportunistically*. Instead of asking a 
 
 ## 5. Goals & Success Metrics
 
-**Challenge goal:** Submit a working demo + 1–3 minute video to the Congressional App Challenge by Oct 26, 2026 at noon.
+**Challenge goal:** Submit a working site + 1–3 minute video to the Congressional App Challenge by Oct 26, 2026 at noon.
 
 **Product goals (if this becomes real):**
 - 10 military families signed up in Virginia Beach (huge military population: NAS Oceana, JEB Little Creek–Fort Story — this is the perfect pilot market)
@@ -78,7 +78,7 @@ The matching insight: donations happen *opportunistically*. Instead of asking a 
 - Reviews/ratings for businesses (great v2 feature — businesses earn badges: "10 mows donated")
 
 ### Deliberate simplifications
-- ZIP-code matching instead of true geolocation (good enough for the demo, honest about it)
+- ZIP-code matching instead of true geolocation (appropriate for the first release)
 - One request per family at a time
 
 ## 7. User Stories
@@ -121,7 +121,7 @@ The matching insight: donations happen *opportunistically*. Instead of asking a 
 
 Keep the stack boring and shippable in 9 days. Two options:
 
-- **Option A (recommended): plain HTML/CSS/JavaScript + a free backend** (e.g., Firebase or Supabase free tier). Fastest path to a live, demoable site; auth and database included.
+- **Option A (recommended): plain HTML/CSS/JavaScript + a free backend** (e.g., Firebase or Supabase free tier). Fastest path to a live site; auth and database included.
 - **Option B: Python (Flask) + SQLite.** Good if Henry wants to show "real" backend code; slightly more setup.
 
 Either is fine for the Challenge — judges care about the idea, the execution, and the video, not the stack. Pick one Saturday morning and don't look back.
@@ -134,9 +134,9 @@ Either is fine for the Challenge — judges care about the idea, the execution, 
 
 **The two-sided incentive design actually works:**
 - *Families* get free lawn care with dignity — no begging on social media, no awkwardness. A structured request feels like a program, not charity.
-- *Businesses* get what small service companies desperately need: differentiation. A "MowForward Partner" badge, a public Impact Board showing their donations, and genuine community goodwill are worth more than a Facebook ad. The cost of one donated mow (~30 min of crew time, already in the neighborhood) is tiny against the marketing value.
+- *Businesses* get what small service companies desperately need: differentiation. A "Mission Mow Partner" badge, a public Impact Board showing their donations, and genuine community goodwill are worth more than a Facebook ad. The cost of one donated mow (~30 min of crew time, already in the neighborhood) is tiny against the marketing value.
 
-**The "already in the neighborhood" mechanic is the differentiator.** Generic volunteer platforms ask businesses to go out of their way. MowForward piggybacks on routes that already exist — it's the lowest-friction form of corporate generosity ever designed for this industry.
+**The "already in the neighborhood" mechanic is the differentiator.** Generic volunteer platforms ask businesses to go out of their way. Mission Mow piggybacks on routes that already exist — it's the lowest-friction form of corporate generosity ever designed for this industry.
 
 **Pilot market is perfect:** Virginia Beach has one of the densest military populations in the country (NAS Oceana, JEB Little Creek–Fort Story, Dam Neck). Supply (lawn companies) and demand (military families) are both concentrated here. If it works in Virginia Beach, the playbook replicates to San Diego, Norfolk, Fayetteville, Killeen…
 
@@ -154,7 +154,7 @@ Either is fine for the Challenge — judges care about the idea, the execution, 
 
 - **Solves a real problem** for a sympathetic, underserved community (military spouses).
 - **Original mechanic** — opportunistic neighborhood matching, not another generic volunteer board.
-- **Working demo is achievable** in the time available (CRUD app, no exotic tech).
+- **A working site is achievable** in the time available (CRUD app, no exotic tech).
 - **Great video story:** "while our service members serve overseas, we take care of the home front — one lawn at a time." Judges remember stories.
 - **Clear future vision** without scope creep — the PRD shows you thought about scale, verification, and sustainability.
 
@@ -168,7 +168,7 @@ Either is fine for the Challenge — judges care about the idea, the execution, 
 | Tue 10/20 | Claim flow + status transitions (open → claimed → done) |
 | Wed 10/21 | Impact Board + polish + mobile check |
 | Thu 10/22 | Test with family/friends; fix bugs |
-| Fri 10/23 | Record the 1–3 minute demo video |
+| Fri 10/23 | Record the 1–3 minute video walkthrough |
 | Sat–Sun 10/24–25 | Register + submit; buffer for surprises |
 | Mon 10/26 | **Hard deadline: noon.** Submit early — don't trust hotel wifi. |
 
@@ -176,10 +176,10 @@ Either is fine for the Challenge — judges care about the idea, the execution, 
 
 Facts verified from the official Challenge info (Oct 2026):
 - **Who:** Middle and high school students — Henry (12, middle school) is eligible. Individuals or teams up to 4; at least half the team must live in or attend school in the district.
-- **What:** An app on any platform, in any language, on any topic — a web app like MowForward qualifies. Must have been created after October 30, 2025.
+- **What:** An app on any platform, in any language, on any topic — a web app like Mission Mow qualifies. Must have been created after October 30, 2025.
 - **Where:** Compete in the district where you live or go to school. → **Verify at congressionalappchallenge.us that Virginia's 2nd district (Virginia Beach) is participating this year and confirm the exact local deadline.**
 - **When:** Submissions close **October 26, 2026 at noon** (confirm the district's exact cutoff — some districts list noon, some 5 PM).
-- **How:** Register at congressionalappchallenge.us → submit the app + a **1–3 minute video** walking through it + answers to questions about the idea and build process. (A finished, polished app is not strictly required — the video and proposal carry weight — but a working demo is much stronger.)
+- **How:** Register at congressionalappchallenge.us → submit the app + a **1–3 minute video** walking through it + answers to questions about the idea and build process. (A finished, polished app is not strictly required — the video and proposal carry weight — but a working site is much stronger.)
 - **Prizes:** Winning app featured on the House website, displayed in the U.S. Capitol for one year, invitation to the #HouseOfCode reception, copyright fee waiver.
 
 **Don't forget:** Henry participated last year, so check last year's registration email for the account/login to reuse — and note what the judges' feedback was, if any.

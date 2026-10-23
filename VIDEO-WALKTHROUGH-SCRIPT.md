@@ -1,4 +1,4 @@
-# MowForward — Demo Video Script
+# Mission Mow — Video Walkthrough Script
 
 Target length: **2:00–2:30** (rules require 1–3 minutes; verify the final cut is ≤ 3:00)
 
@@ -11,7 +11,7 @@ how it works → difficulty/solution → takeaway.
 ## Pre-recording checklist (5 minutes)
 
 1. From this folder: `python3 -m http.server 8000` → open `http://localhost:8000`
-2. Scroll to the page footer → click **"Reset demo data"** so the video starts
+2. Scroll to the page footer → click **"Reset site data"** so the video starts
    from a clean, known state.
 3. Turn on Do Not Disturb. Full-screen the browser, zoom in a notch
    (Cmd +) so text is readable on camera.
@@ -21,7 +21,7 @@ how it works → difficulty/solution → takeaway.
 ## Shot 0 — Opening (0:00–0:15) · landing page (index.html)
 
 > "Hi, I'm Henry Miller, a middle schooler from Virginia Beach, Virginia —
-> that's Virginia's 2nd District. My app is called **MowForward**. Its purpose
+> that's Virginia's 2nd District. My app is called **Mission Mow**. Its purpose
 > is to connect local lawn care businesses with military families, so a crew
 > already working in a neighborhood can stop by and donate a mow while a
 > spouse is deployed."
@@ -33,7 +33,7 @@ how it works → difficulty/solution → takeaway.
 > "Virginia Beach has one of the largest military communities in the country —
 > Oceana, Little Creek, and Dam Neck are all right here. When a spouse deploys
 > for months, the lawn doesn't wait — and neither do the dozens of lawn crews
-> already driving these streets every week. MowForward simply introduces them."
+> already driving these streets every week. Mission Mow simply introduces them."
 
 ## Shot 2 — Family flow (0:35–1:05) · family.html ("For military families")
 
@@ -48,8 +48,8 @@ how it works → difficulty/solution → takeaway.
 
 ## Shot 3 — Business flow (1:05–1:40) · business.html ("For lawn care businesses")
 
-- Fill "Join MowForward": company (e.g. GreenStripe Lawn Co.), contact,
-  email, phone, **service ZIPs** (e.g. 23456, 23452, 23464) → **Join MowForward.**
+- Fill "Join Mission Mow": company (e.g. GreenStripe Lawn Co.), contact,
+  email, phone, **service ZIPs** (e.g. 23456, 23452, 23464) → **Join Mission Mow.**
 - Scroll to **"Near my jobs"** — "Open requests in your service area — claim one
   with a single click." Click **"Claim this mow"** on the new request.
 - Click **"Mark complete."**
@@ -68,9 +68,9 @@ how it works → difficulty/solution → takeaway.
 
 ## Shot 5 — How it's built + difficulty + 2.0 (1:55–2:15)
 
-> "I built MowForward with plain **HTML, CSS, and JavaScript** — no frameworks,
+> "I built Mission Mow with plain **HTML, CSS, and JavaScript** — no frameworks,
 > no build step. All the data is stored in the browser's **localStorage**, so
-> the demo works with zero backend. The hardest part was [Henry's actual
+> the site works with zero backend. The hardest part was [Henry's actual
 > difficulty — e.g. keeping the family and business views in sync on status
 > changes]; I solved it by [his actual solution]. If I built a 2.0, I'd add
 > a real backend, military-status verification, and text notifications."
@@ -87,7 +87,7 @@ how it works → difficulty/solution → takeaway.
 - [ ] Video uploaded to **YouTube or Vimeo, set to PUBLIC** (judges cannot view
       private or unlisted videos)
 - [ ] Video covers: name(s) + app name · purpose · intended audience ·
-      tools/languages · live demo of how it works
+      tools/languages · live walkthrough of how it works
 - [ ] **Register at congressionalappchallenge.us** before submitting (all team
       members must be on the registration form)
 - [ ] Written answers at submission: app title · one-sentence purpose ·
