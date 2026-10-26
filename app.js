@@ -1,7 +1,7 @@
 /* ============================================================
    Mission Mow v1 — site data layer + page logic.
    Everything is stored in the browser (localStorage), so the
-   site runs with zero backend. Data model mirrors PRD.md:
+   site runs with zero backend. Data model includes:
    families, businesses, requests (open -> claimed -> done).
    ============================================================ */
 

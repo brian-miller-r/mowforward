@@ -6,3 +6,12 @@ tmp/
 
 # Local server and tool output
 *.log
+
+# Congressional App Challenge submission-only materials
+SUBMISSION-ANSWERS.md
+VIDEO-DEMO-SCRIPT.txt
+VIDEO-WALKTHROUGH-SCRIPT.md
+demo-runner.html
+script-preview.html
+images/mission-mow-cover-*.jpg
+images/mission-mow-home-no-navigation.png

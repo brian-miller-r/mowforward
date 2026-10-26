@@ -1,7 +1,7 @@
-# Mission Mow — v1 Site
+# Mission Mow
 
-A two-sided lawn-care donation platform, built for the
-2026 Congressional App Challenge (Virginia's 2nd District).
+A prototype that connects military families who need lawn help with local
+lawn-care businesses that can donate an extra stop on an existing route.
 
 ## Run it
 
@@ -23,7 +23,7 @@ public-service editorial design inspired by the visual structure of America.gov.
 
 ## What's inside
 
-- `index.html` — landing page: hero, how it works, quotes, live Impact Board
+- `index.html` — landing page: hero, how it works, coverage map, and Impact Board
 - `family.html` — military-family signup + "request a mow" form + request status
 - `business.html` — lawn-business signup + "Near My Jobs" dashboard (claim requests, mark complete)
 - `styles.css` — all styling
@@ -31,23 +31,15 @@ public-service editorial design inspired by the visual structure of America.gov.
   so the site works with zero backend. Do not enter real addresses, gate codes,
   deployment information, or other sensitive data.
 - `images/hero-yard.jpg` — hero image
-- `PRD.md` — the product requirements + business case the site is built from
 
 ## Site data
 
 The first time the site loads it seeds a few families, businesses, and
 requests (some open, some completed) so every screen has something to show.
-The footer of each page has a **"Reset site data"** link to start over.
+The data remains in the browser and can be cleared through the browser's site
+data controls.
 
-Try this flow for the video walkthrough:
-
-1. As a business: sign up on `business.html`, see the open requests near your ZIPs,
-   claim one.
-2. Mark it complete — watch the Impact Board on `index.html` tick up.
-3. As a family: sign up on `family.html`, post a request, watch its status change
-   from Open → Claimed → Done.
-
-## What's next (from the PRD)
+## Possible future work
 
 - Real backend (Firebase/Supabase free tier) instead of localStorage
 - Military-status verification via spouse organizations
