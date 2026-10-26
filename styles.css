@@ -104,7 +104,10 @@ h1, h2, h3 { letter-spacing: -.035em; line-height: 1.05; }
 .text-link { color: var(--blue-dark); display: inline-block; font-weight: 800; margin-top: 27px; text-decoration-thickness: 1px; text-underline-offset: 5px; }
 .text-link span { color: var(--red); font-size: 1.25rem; margin-left: 4px; }
 .site-footer-v2 { align-items: center; color: #4f5662; display: flex; font-size: .78rem; justify-content: space-between; padding: 25px 8%; }
-.home-footer { background: var(--ink); color: #c3c8d1; }
+.home-footer { background: var(--ink); color: #c3c8d1; padding-right: 64px; position: relative; }
+.easter-egg-mower { bottom: 9px; display: block; height: 22px; opacity: .25; position: absolute; right: 10px; text-decoration: none; transition: opacity .18s ease, transform .18s ease; width: 33px; }
+.easter-egg-mower:hover, .easter-egg-mower:focus-visible { opacity: .9; outline: none; transform: translateY(-2px); }
+.easter-egg-mower img { display: block; height: 100%; object-fit: contain; width: 100%; }
 .admin-access { background: none; border: 0; color: rgba(255,255,255,.16); cursor: pointer; font-size: .7rem; padding: 0; text-align: left; }
 .admin-access:hover, .admin-access:focus-visible { color: rgba(255,255,255,.7); outline: none; text-decoration: underline; text-underline-offset: 4px; }
 .admin-sign-in { align-items: center; background: rgba(13, 15, 21, .68); display: flex; inset: 0; justify-content: center; padding: 22px; position: fixed; z-index: 10; }
@@ -187,6 +190,11 @@ h1, h2, h3 { letter-spacing: -.035em; line-height: 1.05; }
 .game-heading { background: var(--ink); color: #fff; padding: 76px 8% 70px; }
 .game-heading h1 { font-family: var(--serif); font-size: clamp(3.1rem, 5.5vw, 5.8rem); font-weight: 400; margin: 0 0 20px; }
 .game-heading > p:last-child { color: #d1d4db; font-size: 1.1rem; margin: 0; max-width: 650px; }
+.hidden-game-modal { align-items: flex-start; background: rgba(8, 14, 22, .9); display: flex; inset: 0; justify-content: center; overflow: auto; padding: 24px; position: fixed; z-index: 30; }
+.hidden-game-dialog { background: var(--paper); box-shadow: 0 26px 80px rgba(0,0,0,.45); max-width: 1180px; position: relative; width: 100%; }
+.hidden-game-dialog .game-section { padding: 54px clamp(24px, 5vw, 76px) 42px; }
+.hidden-game-close { background: var(--ink); border: 0; border-radius: 50%; color: #fff; cursor: pointer; font-size: 1.6rem; height: 37px; line-height: 1; padding: 0 0 3px; position: absolute; right: 17px; top: 16px; width: 37px; z-index: 1; }
+.hidden-game-close:hover, .hidden-game-close:focus-visible { background: var(--red); outline: 3px solid rgba(201,40,45,.23); }
 .game-section { padding: 58px 8% 68px; }
 .game-topline { align-items: end; display: flex; gap: 28px; justify-content: space-between; margin-bottom: 30px; }
 .game-topline h2 { font-family: var(--serif); font-size: clamp(2rem, 3.5vw, 3.3rem); font-weight: 400; margin: 0; max-width: 600px; }
@@ -225,6 +233,9 @@ h1, h2, h3 { letter-spacing: -.035em; line-height: 1.05; }
   .site-footer-v2 { align-items: flex-start; flex-direction: column; gap: 10px; padding: 23px 30px; }
   .editor-grid { grid-template-columns: 1fr; }
   .game-heading, .game-section { padding-left: 30px; padding-right: 30px; }
+  .hidden-game-modal { align-items: flex-start; padding: 0; }
+  .hidden-game-dialog { min-height: 100%; }
+  .hidden-game-dialog .game-section { padding: 68px 30px 42px; }
   .game-topline, .game-controls { align-items: flex-start; flex-direction: column; }
   .game-scoreboard { gap: 20px; }
 }

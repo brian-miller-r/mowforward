@@ -18,7 +18,9 @@ const esc = (s) =>
   }[c]));
 const uid = (p) => p + Date.now().toString(36) + Math.floor(Math.random() * 1e4).toString(36);
 const today = () => new Date().toISOString().slice(0, 10);
-const IMPACT_START_DATE = "2026-10-22";
+// The first three completed requests are sample activity so the impact board
+// tells the Mission Mow story before a visitor completes a live test mow.
+const IMPACT_START_DATE = "2026-10-01";
 const ADMIN_PASSWORD = "SandpiperSandbridge!2025";
 const CONTENT_FIELDS = [
   ["Home", "home.hero.eyebrow", "Homepage hero label", "Neighbor-to-neighbor support"],
@@ -31,7 +33,7 @@ const CONTENT_FIELDS = [
   ["Home", "home.quote.credit", "Homepage quote credit", "— Congresswoman Jen Kiggans (VA-02)"],
   ["Home", "home.impact.eyebrow", "Impact board label", "Community impact board"],
   ["Home", "home.impact.title", "Impact board headline", "Small stops. Meaningful relief."],
-  ["Home", "home.impact.description", "Impact board description", "These totals update after you complete a mow."],
+  ["Home", "home.impact.description", "Impact board description", "Sample activity is included below. These totals update after you complete a mow."],
   ["Home", "home.callout.eyebrow", "Homepage closing label", "Built for Virginia's 2nd District"],
   ["Home", "home.callout.title", "Homepage closing headline", "When service takes someone away, a neighborhood can step in."],
   ["Families", "family.heading.eyebrow", "Families page label", "For military families"],
@@ -48,11 +50,6 @@ const CONTENT_FIELDS = [
   ["Businesses", "business.profile.title", "Business profile heading", "Join as a partner business"],
   ["Businesses", "business.principle.eyebrow", "Business principle label", "One principle"],
   ["Businesses", "business.principle.title", "Business principle heading", "Local routes make local generosity easier."],
-  ["Minigame", "minigame.heading.eyebrow", "Minigame label", "A quick neighborhood challenge"],
-  ["Minigame", "minigame.heading.title", "Minigame headline", "MISSION MINIGAME"],
-  ["Minigame", "minigame.heading.lede", "Minigame description", "Drive the mower across a 3D lawn and cut every tall-grass patch before the clock expires."],
-  ["Minigame", "minigame.route.eyebrow", "Minigame route label", "Your route"],
-  ["Minigame", "minigame.route.title", "Minigame route heading", "Drive your mower through the tall grass."],
 ];
 const fmtDate = (iso) => {
   if (!iso) return "";
@@ -271,6 +268,30 @@ function initCoverageMap() {
   }));
 }
 
+function initHiddenMinigame() {
+  const trigger = $(".easter-egg-mower");
+  const modal = $("#hidden-game-modal");
+  const close = $("#hidden-game-close");
+  if (!trigger || !modal || !close) return;
+
+  const closeGame = () => {
+    modal.classList.add("hidden");
+    modal.setAttribute("aria-hidden", "true");
+    document.dispatchEvent(new CustomEvent("mission-mow-close-game"));
+    trigger.focus();
+  };
+  trigger.addEventListener("click", (event) => {
+    event.preventDefault();
+    modal.classList.remove("hidden");
+    modal.setAttribute("aria-hidden", "false");
+    close.focus();
+  });
+  close.addEventListener("click", closeGame);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !modal.classList.contains("hidden")) closeGame();
+  });
+}
+
 /* ---------- family page ---------- */
 function setStatusMessage(selector, message) {
   const el = $(selector);
@@ -468,6 +489,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (page === "home") {
     initHome();
     initCoverageMap();
+    initHiddenMinigame();
   }
   if (page === "family") initFamily();
   if (page === "business") initBusiness();

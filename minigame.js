@@ -6,6 +6,7 @@
   const timeEl = document.querySelector("#game-time");
   const statusEl = document.querySelector("#game-status");
   const startButton = document.querySelector("#game-start");
+  const gameModal = document.querySelector("#hidden-game-modal");
   const gl = canvas.getContext("webgl", { antialias: true, alpha: false });
 
   if (!gl) {
@@ -103,27 +104,16 @@
     },
   };
 
-  const grassLayout = [
-    [-10,-39], [-4,-38], [3,-40], [10,-39],
-    [-12,-34], [-6,-34], [1,-33], [8,-34],
-    [-9,-29], [-2,-28], [5,-29], [11,-28],
-    [-11,-24], [-5,-24], [2,-23], [9,-24],
-    [-8,-19], [-1,-18], [6,-19], [12,-18],
-    [-10,-14], [-4,-14], [3,-13], [10,-14],
-    [-12,-9], [-6,-9], [1,-8], [8,-9],
-    [-9,-4], [-2,-3], [5,-4], [11,-3],
-    [-11,1], [-5,1], [2,2], [9,1],
-    [-8,6], [-1,7], [6,6], [12,7],
-  ];
-  const mower = { x: 0, z: -11, angle: 0 };
-  let patches = [];
-  let score = 0;
+  const LAWN = { left: -13, right: 13, near: -44, far: 10, cell: 1.35, cols: 19, rows: 40 };
+  const mower = { x: 0, z: -5.8, angle: 0 };
+  let grassCells = [];
+  let cutCells = 0;
   let timeLeft = 90;
   let playing = false;
   let lastFrame = 0;
-  let frame = 0;
   const keys = new Set();
   const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
+  const cutPercent = () => Math.floor((cutCells / grassCells.length) * 100);
 
   const colorData = (color) => {
     const shades = [1, .62, 1.15, .42, .78, .58];
@@ -151,99 +141,168 @@
     drawCube(m4.multiply(viewProjection, model), color);
   }
 
-  function localBox(viewProjection, parent, x, y, z, width, height, depth, color) {
-    const model = m4.multiply(parent, m4.multiply(m4.translation(x, y, z), m4.scaling(width, height, depth)));
+  function localBox(viewProjection, parent, x, y, z, width, height, depth, color, angle = 0) {
+    const model = m4.multiply(parent, m4.multiply(m4.translation(x, y, z), m4.multiply(m4.rotationY(angle), m4.scaling(width, height, depth))));
     drawCube(m4.multiply(viewProjection, model), color);
   }
 
-  function drawPatch(viewProjection, patch) {
-    if (patch.mowed) {
-      box(viewProjection, patch.x, .05, patch.z, 1.5, .09, 1.3, [.34,.62,.26]);
-      return;
+  function drawLawn(viewProjection) {
+    box(viewProjection, 0, -.15, -17, 27.4, .3, 56, [.12,.42,.12]);
+    grassCells.forEach((cell) => {
+      const variation = ((cell.col * 7 + cell.row * 3) % 4) * .012;
+      const color = cell.cut
+        ? [.27 + variation, .55 + variation, .19 + variation]
+        : [.075 + variation, .34 + variation, .075 + variation];
+      box(viewProjection, cell.x, cell.cut ? .012 : .085, cell.z, LAWN.cell - .035, cell.cut ? .03 : .17, LAWN.cell - .035, color);
+      if (cell.cut && cell.row % 4 === 0) {
+        box(viewProjection, cell.x, .035, cell.z, LAWN.cell - .08, .012, .08, [.42,.67,.29]);
+      }
+    });
+  }
+
+  function drawFence(viewProjection) {
+    [-14.35, 14.35].forEach((x) => {
+      box(viewProjection, x, 1.35, -17, .2, 2.7, 55.3, [.53,.36,.17]);
+      box(viewProjection, x, .86, -17, .35, .12, 55.3, [.76,.62,.38]);
+      box(viewProjection, x, 1.78, -17, .35, .12, 55.3, [.76,.62,.38]);
+    });
+    for (let z = -43; z <= 9; z += 5) {
+      box(viewProjection, -14.35, 1.7, z, .62, 3.4, .62, [.38,.24,.1]);
+      box(viewProjection, 14.35, 1.7, z, .62, 3.4, .62, [.38,.24,.1]);
     }
-    box(viewProjection, patch.x, .5, patch.z, 1.35, .95, .34, [.09,.38,.12]);
-    box(viewProjection, patch.x - .3, .58, patch.z + .24, .3, 1.2, .7, [.15,.52,.15], .35);
-    box(viewProjection, patch.x + .28, .52, patch.z - .2, .28, 1.08, .72, [.23,.59,.15], -.4);
+    [-45.3, 11.3].forEach((z) => {
+      box(viewProjection, 0, 1.25, z, 28.4, 2.5, .22, [.53,.36,.17]);
+      box(viewProjection, 0, .85, z, 28.4, .13, .36, [.76,.62,.38]);
+      box(viewProjection, 0, 1.75, z, 28.4, .13, .36, [.76,.62,.38]);
+    });
   }
 
   function drawMower(viewProjection) {
-    const parent = m4.multiply(m4.translation(mower.x, .48, mower.z), m4.rotationY(mower.angle));
-    localBox(viewProjection, parent, 0, 0, 0, 1.35, .42, 1.65, [.8,.08,.07]);
-    localBox(viewProjection, parent, 0, .33, .24, .72, .38, .7, [.18,.24,.24]);
-    localBox(viewProjection, parent, 0, .55, .3, .45, .08, .42, [.54,.6,.55]);
-    localBox(viewProjection, parent, -.62, -.18, -.48, .27, .3, .34, [.035,.045,.04]);
-    localBox(viewProjection, parent, .62, -.18, -.48, .27, .3, .34, [.035,.045,.04]);
-    localBox(viewProjection, parent, -.62, -.18, .48, .27, .3, .34, [.035,.045,.04]);
-    localBox(viewProjection, parent, .62, -.18, .48, .27, .3, .34, [.035,.045,.04]);
-    localBox(viewProjection, parent, 0, .7, -.7, .08, .08, 1.7, [.78,.76,.58]);
-    localBox(viewProjection, parent, 0, .74, -1.45, .46, .11, .12, [.05,.07,.07]);
+    const parent = m4.multiply(m4.translation(mower.x, .5, mower.z), m4.rotationY(mower.angle));
+    // Cutting deck and chassis.
+    localBox(viewProjection, parent, 0, -.24, .68, 2.28, .22, 1.42, [.85,.57,.07]);
+    localBox(viewProjection, parent, 0, .04, .22, 1.46, .42, 1.78, [.76,.06,.05]);
+    localBox(viewProjection, parent, 0, .42, .38, .96, .46, .8, [.89,.1,.08]);
+    // Engine hood, seat, steering column and wheel.
+    localBox(viewProjection, parent, 0, .37, .94, 1.2, .36, .58, [.68,.05,.04]);
+    localBox(viewProjection, parent, 0, .62, -.28, .68, .3, .58, [.09,.12,.12]);
+    localBox(viewProjection, parent, 0, .86, -.1, .09, .62, .09, [.28,.3,.28], -.25);
+    localBox(viewProjection, parent, 0, .65, .15, .07, .67, .07, [.18,.2,.2], .2);
+    // Four chunky tires.
+    [[- .82,.56], [.82,.56], [-.78,-.6], [.78,-.6]].forEach(([x, z]) => {
+      localBox(viewProjection, parent, x, -.2, z, .42, .46, .43, [.03,.04,.04]);
+      localBox(viewProjection, parent, x, -.2, z, .26, .28, .45, [.33,.35,.34]);
+    });
+    // Headlights and a small Mission Mow stripe.
+    localBox(viewProjection, parent, -.36, .38, 1.27, .2, .13, .06, [.96,.88,.45]);
+    localBox(viewProjection, parent, .36, .38, 1.27, .2, .13, .06, [.96,.88,.45]);
+    localBox(viewProjection, parent, 0, .28, -.72, .84, .07, .08, [.95,.95,.88]);
   }
 
   function drawTree(viewProjection, x, z) {
-    box(viewProjection, x, .65, z, .3, 1.3, .3, [.36,.2,.08]);
-    box(viewProjection, x, 1.8, z, 1.65, 1.25, 1.55, [.08,.33,.11]);
-    box(viewProjection, x - .18, 2.55, z + .1, 1.15, .85, 1.1, [.12,.43,.16]);
+    box(viewProjection, x, .7, z, .34, 1.4, .34, [.34,.19,.07]);
+    box(viewProjection, x, 1.88, z, 1.72, 1.28, 1.58, [.05,.28,.08]);
+    box(viewProjection, x - .22, 2.55, z + .1, 1.22, .9, 1.18, [.1,.38,.13]);
+  }
+
+  function drawAmericanFlag(viewProjection) {
+    const x = -16.4; const z = -9;
+    box(viewProjection, x, 3.2, z, .13, 6.4, .13, [.48,.5,.5]);
+    box(viewProjection, x, 6.45, z, .32, .14, .32, [.86,.7,.22]);
+    // A gently stepped red-and-white flag and blue canton.
+    const flagX = x + .98;
+    for (let stripe = 0; stripe < 7; stripe += 1) {
+      box(viewProjection, flagX, 5.75 - stripe * .28, z, 1.9 - stripe * .05, .17, .07, stripe % 2 === 0 ? [.76,.05,.07] : [.92,.92,.87]);
+    }
+    box(viewProjection, x + .48, 5.38, z, .78, .87, .09, [.04,.21,.48]);
+  }
+
+  function drawNeptune(viewProjection) {
+    const x = 16.4; const z = -27;
+    // Stylized bronze Neptune statue: stone base, body, arms, trident and crown.
+    box(viewProjection, x, .38, z, 2.8, .76, 2.8, [.5,.48,.4]);
+    box(viewProjection, x, .94, z, 1.85, .4, 1.85, [.63,.59,.47]);
+    box(viewProjection, x, 2.2, z, .68, 2.18, .72, [.32,.43,.37]);
+    box(viewProjection, x, 3.45, z, 1.1, .84, .72, [.37,.5,.42]);
+    box(viewProjection, x - .86, 2.8, z, .38, .42, 1.65, [.34,.47,.39], .42);
+    box(viewProjection, x + .95, 2.94, z, .3, .34, 2.1, [.34,.47,.39], -.18);
+    box(viewProjection, x + 1.35, 4.55, z, .12, 3.3, .12, [.38,.5,.42]);
+    [-.26, 0, .26].forEach((offset) => box(viewProjection, x + 1.35 + offset, 6.14, z, .1, .75, .1, [.38,.5,.42]));
+    box(viewProjection, x, 4.1, z, .92, .14, .88, [.43,.56,.46]);
+  }
+
+  function drawBeachfront(viewProjection) {
+    box(viewProjection, 0, -.1, 14.5, 42, .18, 6.6, [.68,.76,.77]);
+    box(viewProjection, 0, -.01, 12.4, 40, .04, 1.5, [.82,.67,.4]);
+    for (let x = -17; x <= 17; x += 5.5) {
+      box(viewProjection, x, .65, 12.25, .12, 1.25, .12, [.4,.25,.1]);
+      box(viewProjection, x, 1.2, 12.25, 2.3, .08, .75, x % 2 ? [.76,.1,.08] : [.07,.31,.67]);
+    }
   }
 
   function render() {
     gl.viewport(0, 0, canvas.width, canvas.height);
     gl.enable(gl.DEPTH_TEST);
-    gl.clearColor(.45, .74, .93, 1);
+    gl.clearColor(.46, .74, .92, 1);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
 
     const forwardX = Math.sin(mower.angle);
     const forwardZ = Math.cos(mower.angle);
     const eye = [
-      clamp(mower.x - forwardX * 6.2, -13.2, 13.2),
-      4.5,
-      clamp(mower.z - forwardZ * 6.2, -44.2, 10.2),
+      clamp(mower.x - forwardX * 7.2, -15, 15),
+      4.7,
+      clamp(mower.z - forwardZ * 7.2, -45.5, 11.5),
     ];
-    const target = [mower.x + forwardX * 2.8, .35, mower.z + forwardZ * 2.8];
-    const projection = m4.perspective(Math.PI / 3.2, canvas.width / canvas.height, .1, 70);
+    const target = [mower.x + forwardX * 3.2, .45, mower.z + forwardZ * 3.2];
+    const projection = m4.perspective(Math.PI / 3.25, canvas.width / canvas.height, .1, 82);
     const viewProjection = m4.multiply(projection, m4.lookAt(eye, target, [0,1,0]));
 
-    box(viewProjection, 0, -.2, -17.5, 31, .35, 59, [.17,.5,.19]);
-    for (let stripe = -44; stripe <= 10; stripe += 4) box(viewProjection, 0, -.005, stripe, 29.6, .03, 1.7, [.25,.59,.24]);
-    [-14.45, 14.45].forEach((x) => box(viewProjection, x, 1.25, -17.5, .5, 2.5, 59, [.34,.24,.13]));
-    [-46.45, 11.45].forEach((z) => box(viewProjection, 0, 1.25, z, 29.4, 2.5, .5, [.34,.24,.13]));
-    for (let post = -44; post <= 10; post += 4) {
-      box(viewProjection, -14.45, 2.15, post, .72, 4.3, .72, [.22,.16,.09]);
-      box(viewProjection, 14.45, 2.15, post, .72, 4.3, .72, [.22,.16,.09]);
-    }
-    for (let post = -12; post <= 12; post += 4) {
-      box(viewProjection, post, 2.15, -46.45, .72, 4.3, .72, [.22,.16,.09]);
-      box(viewProjection, post, 2.15, 11.45, .72, 4.3, .72, [.22,.16,.09]);
-    }
-    [[-16,-42], [16,-42], [-16,10], [16,10], [-15,-16], [15,-5]].forEach(([x,z]) => drawTree(viewProjection, x, z));
-    patches.forEach((patch) => drawPatch(viewProjection, patch));
+    drawBeachfront(viewProjection);
+    drawLawn(viewProjection);
+    drawFence(viewProjection);
+    [[-16,-42], [16,-42], [-16,8], [16,8], [-16,-23], [16,-5], [-16,-32], [16,-37]].forEach(([x, z]) => drawTree(viewProjection, x, z));
+    drawAmericanFlag(viewProjection);
+    drawNeptune(viewProjection);
     drawMower(viewProjection);
   }
 
   const updateHud = () => {
-    scoreEl.textContent = score;
+    scoreEl.textContent = `${cutPercent()}%`;
     timeEl.textContent = Math.max(0, Math.ceil(timeLeft));
   };
 
   function resetMission() {
-    mower.x = 0; mower.z = -6.5; mower.angle = 0;
-    patches = grassLayout.map(([x, z]) => ({ x, z, mowed: false }));
-    score = 0;
+    mower.x = 0; mower.z = -5.8; mower.angle = 0;
+    grassCells = [];
+    for (let row = 0; row < LAWN.rows; row += 1) {
+      for (let col = 0; col < LAWN.cols; col += 1) {
+        grassCells.push({
+          col,
+          row,
+          x: LAWN.left + LAWN.cell * .5 + col * LAWN.cell,
+          z: LAWN.near + LAWN.cell * .5 + row * LAWN.cell,
+          cut: false,
+        });
+      }
+    }
+    cutCells = 0;
     timeLeft = 90;
     updateHud();
   }
 
   function finishMission() {
     playing = false;
-    const complete = score === patches.length;
+    const percent = cutPercent();
+    const complete = percent >= 75;
     statusEl.textContent = complete
-      ? `Route complete! You mowed all ${score} tall-grass patches.`
-      : `Shift complete! You mowed ${score} of ${patches.length} patches. Try again to clear the lawn.`;
+      ? `Lawn complete! You cut ${percent}% into clean Mission Mow stripes.`
+      : `Time is up. You cut ${percent}% of the lawn—make wider, steadier passes next time.`;
     startButton.innerHTML = "Play again <span aria-hidden=\"true\">→</span>";
   }
 
   function update(delta) {
-    const turnSpeed = 2.35;
-    const driveSpeed = 6.4;
+    const turnSpeed = 2.3;
+    const driveSpeed = 7.2;
     if (keys.has("a")) mower.angle -= turnSpeed * delta;
     if (keys.has("d")) mower.angle += turnSpeed * delta;
     const direction = (keys.has("w") ? 1 : 0) - (keys.has("s") ? 1 : 0);
@@ -251,36 +310,44 @@
       mower.x += Math.sin(mower.angle) * driveSpeed * direction * delta;
       mower.z += Math.cos(mower.angle) * driveSpeed * direction * delta;
     }
-    mower.x = clamp(mower.x, -13, 13);
-    mower.z = clamp(mower.z, -44, 10.2);
-    patches.forEach((patch) => {
-      if (!patch.mowed && Math.hypot(mower.x - patch.x, mower.z - patch.z) < 1.12) {
-        patch.mowed = true;
-        score += 1;
-        statusEl.textContent = `Nice pass! ${score} of ${patches.length} tall-grass patches mowed.`;
+    mower.x = clamp(mower.x, -12.15, 12.15);
+    mower.z = clamp(mower.z, -43.15, 9.15);
+    grassCells.forEach((cell) => {
+      const inDeck = !cell.cut && Math.hypot(mower.x - cell.x, mower.z - cell.z) < 1.45;
+      if (inDeck) {
+        cell.cut = true;
+        cutCells += 1;
       }
     });
     timeLeft -= delta;
     updateHud();
-    if (score === patches.length || timeLeft <= 0) finishMission();
+    const percent = cutPercent();
+    if (percent && percent % 20 === 0 && Math.floor(timeLeft * 10) % 8 === 0) {
+      statusEl.textContent = `${percent}% cut. Keep your rows tidy.`;
+    }
+    if (percent >= 75 || timeLeft <= 0) finishMission();
   }
 
   function gameLoop(now) {
     const delta = Math.min((now - lastFrame) / 1000, .05);
     lastFrame = now;
-    if (playing) update(delta);
-    render();
-    frame = requestAnimationFrame(gameLoop);
+    const gameIsVisible = !gameModal || !gameModal.classList.contains("hidden");
+    if (gameIsVisible) {
+      if (playing) update(delta);
+      render();
+    }
+    requestAnimationFrame(gameLoop);
   }
 
   function startMission() {
     resetMission();
     playing = true;
-    statusEl.textContent = "Mission underway — W/S drives and A/D steers the mower.";
+    statusEl.textContent = "Mission underway — cut tall grass into clean stripes. W/S drives, A/D steers.";
     startButton.innerHTML = "Restart mission <span aria-hidden=\"true\">↻</span>";
   }
 
   document.addEventListener("keydown", (event) => {
+    if (gameModal?.classList.contains("hidden")) return;
     const key = event.key.toLowerCase();
     if (["w", "a", "s", "d"].includes(key)) {
       event.preventDefault();
@@ -289,10 +356,16 @@
   });
   document.addEventListener("keyup", (event) => keys.delete(event.key.toLowerCase()));
   window.addEventListener("blur", () => keys.clear());
+  document.addEventListener("mission-mow-close-game", () => {
+    playing = false;
+    keys.clear();
+    statusEl.textContent = "Press Start mission, then use WASD to mow clean stripes into the lawn.";
+    startButton.innerHTML = "Start mission <span aria-hidden=\"true\">→</span>";
+  });
   startButton.addEventListener("click", startMission);
 
   resetMission();
-  statusEl.textContent = "Press Start mission, then use W/S to drive and A/D to steer.";
+  statusEl.textContent = "Press Start mission, then use WASD to mow clean stripes into the lawn.";
   lastFrame = performance.now();
-  frame = requestAnimationFrame(gameLoop);
+  requestAnimationFrame(gameLoop);
 })();

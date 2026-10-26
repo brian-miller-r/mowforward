@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mission Mow | Demo Runner</title>
+  <style>
+    :root { color-scheme: light; --ink: #131620; --paper: #f6f5f1; --blue: #1769bf; --line: #d7d9dd; --red: #c9282d; }
+    * { box-sizing: border-box; }
+    body { background: #dfe3e7; color: var(--ink); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; }
+    .demo-layout { display: grid; grid-template-columns: minmax(310px, 35vw) 1fr; height: 100vh; }
+    .script-panel { background: var(--paper); border-right: 1px solid var(--line); overflow: auto; padding: 28px 30px 38px; }
+    .script-panel h1 { font-family: Georgia, "Times New Roman", serif; font-size: 2.2rem; font-weight: 400; line-height: 1; margin: 0 0 10px; }
+    .script-panel > p { color: #5f6672; font-size: .88rem; margin: 0 0 25px; }
+    .cue { border-top: 2px solid var(--ink); margin-top: 22px; padding-top: 15px; }
+    .cue-time { color: var(--red); font-size: .7rem; font-weight: 800; letter-spacing: .1em; margin: 0 0 6px; text-transform: uppercase; }
+    .cue h2 { font-size: 1.05rem; margin: 0 0 9px; }
+    .cue p { font-family: Georgia, "Times New Roman", serif; font-size: 1.03rem; line-height: 1.45; margin: 0; }
+    .cue .show { color: #59616d; font-family: Inter, ui-sans-serif, system-ui, sans-serif; font-size: .78rem; font-weight: 700; line-height: 1.4; margin-top: 10px; }
+    .site-panel { background: #fff; display: grid; grid-template-rows: auto 1fr; min-width: 0; }
+    .site-toolbar { align-items: center; background: var(--ink); color: #fff; display: flex; gap: 9px; padding: 10px 14px; }
+    .site-toolbar span { flex: 1; font-size: .78rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+    .site-toolbar button { background: transparent; border: 1px solid rgba(255,255,255,.46); border-radius: 4px; color: #fff; cursor: pointer; font-size: .75rem; font-weight: 800; padding: 7px 9px; }
+    .site-toolbar button:hover { background: var(--blue); border-color: var(--blue); }
+    iframe { border: 0; height: 100%; min-height: 0; width: 100%; }
+    @media (max-width: 900px) { .demo-layout { grid-template-columns: 1fr; grid-template-rows: minmax(300px, 43vh) 1fr; } .script-panel { border-bottom: 1px solid var(--line); border-right: 0; padding: 24px; } }
+  </style>
+</head>
+<body>
+  <main class="demo-layout">
+    <aside class="script-panel" aria-label="Demo narration script">
+      <h1>Mission Mow<br>Demo Script</h1>
+      <p>Keep the recording under 3 minutes. Henry narrates while the site is operated on the right.</p>
+
+      <section class="cue"><p class="cue-time">0:00-0:30 · Home</p><h2>Introduce Mission Mow</h2><p>“Hi, I’m Henry Miller. I’m in seventh grade at Prince Sam Middle School. I got this idea when my dad offered to help mow our friend’s lawn while her husband was deployed and she was caring for a toddler. My app is called Mission Mow. It connects military families who need lawn help with local lawn-care businesses that can donate one extra stop on a route they already serve.”</p><p class="show">Show: Home page and How Mission Mow Works.</p></section>
+      <section class="cue"><p class="cue-time">0:30-0:45 · Map</p><h2>Show the local idea</h2><p>“The map shows a sample Hampton Roads network. Blue markers represent lawn businesses and green markers represent participating home areas. The Impact Board updates after a mow is completed.”</p><p class="show">Show: Coverage map and Community Impact Board.</p></section>
+      <section class="cue"><p class="cue-time">0:45-1:20 · Families</p><h2>Post a request</h2><p>“On the family side, someone creates a profile and posts a lawn request. It includes the basic route details a crew needs, like ZIP code, lawn size, and preferred days. It begins as Open.”</p><p class="show">Show: Create a fake family profile, then post a request in ZIP 23456.</p></section>
+      <section class="cue"><p class="cue-time">1:20-1:55 · Businesses</p><h2>Claim and complete it</h2><p>“A lawn-care company joins with the ZIP codes it already serves. It sees open requests nearby, claims one that fits its route, and marks it complete when the work is done.”</p><p class="show">Show: Join as a fake business with ZIP 23456, claim the request, and mark it complete.</p></section>
+      <section class="cue"><p class="cue-time">1:55-2:10 · Impact</p><h2>Show the result</h2><p>“A completed mow can include a yard sign that credits the business and helps another family or crew discover Mission Mow. The Impact Board increases automatically.”</p><p class="show">Show: Yard-sign partner benefit, then the updated Impact Board.</p></section>
+      <section class="cue"><p class="cue-time">2:10-2:50 · Close</p><h2>How it was built</h2><p>“I built Mission Mow with HTML, CSS, and JavaScript. The hardest part was making the overall layout of the site and just configuring all of the controls and stuff. I came up with an idea by using ChatGPT to help me figure out ideas and build the site. For a 2.0, I would add a real backend, military-family verification, and notifications. Thank you.”</p></section>
+    </aside>
+
+    <section class="site-panel" aria-label="Live Mission Mow site">
+      <div class="site-toolbar"><span>Live Mission Mow site</span><button type="button" data-page="index.html">Home</button><button type="button" data-page="family.html">Families</button><button type="button" data-page="business.html">Businesses</button></div>
+      <iframe id="demo-site" src="index.html" title="Mission Mow live demo"></iframe>
+    </section>
+  </main>
+  <script>
+    const site = document.querySelector("#demo-site");
+    document.querySelectorAll("[data-page]").forEach((button) => button.addEventListener("click", () => { site.src = button.dataset.page; }));
+  </script>
+</body>
+</html>

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Mission Mow | Homefront support</title>
   <meta name="description" content="Mission Mow connects military families with local lawn care businesses.">
-  <link rel="stylesheet" href="styles.css?v=20261023a">
+  <link rel="stylesheet" href="styles.css?v=20261025g">
   <link rel="stylesheet" href="vendor/maplibre-gl.css?v=5.24.0">
 </head>
 <body data-page="home" data-storage-namespace="mission_mow">
@@ -20,7 +20,6 @@
         <a href="index.html" aria-current="page">Home</a>
         <a href="family.html">Families</a>
         <a href="business.html">Businesses</a>
-        <a href="minigame.html">MISSION MINIGAME</a>
       </nav>
     </header>
 
@@ -85,7 +84,7 @@
       <div>
         <p class="eyebrow" data-edit-key="home.impact.eyebrow" data-edit-label="Impact board label">Community impact board</p>
         <h2 data-edit-key="home.impact.title" data-edit-label="Impact board headline">Small stops. Meaningful relief.</h2>
-        <p data-edit-key="home.impact.description" data-edit-label="Impact board description">These totals update after you complete a mow.</p>
+        <p data-edit-key="home.impact.description" data-edit-label="Impact board description">Sample activity is included below. These totals update after you complete a mow.</p>
       </div>
       <div class="impact-stats" aria-label="Community impact totals">
         <div><strong id="stat-mows">0</strong><span>lawns mowed</span></div>
@@ -103,10 +102,34 @@
     <footer class="site-footer-v2 home-footer">
       <button class="admin-access" type="button">Admin panel</button>
       <span>Built by Henry Miller for the 2026 Congressional App Challenge</span>
+      <a class="easter-egg-mower" href="#hidden-lawn-mission" aria-label="Discover the hidden Mission Mow minigame" title="A small mowing mission awaits">
+        <img src="images/hidden-lawnmower-photo.png" alt="" width="360" height="240">
+      </a>
     </footer>
   </main>
 
+  <div id="hidden-game-modal" class="hidden hidden-game-modal" aria-hidden="true">
+    <section class="hidden-game-dialog" role="dialog" aria-modal="true" aria-labelledby="hidden-game-title">
+      <button id="hidden-game-close" class="hidden-game-close" type="button" aria-label="Close hidden lawn mission">×</button>
+      <section class="game-section" aria-labelledby="hidden-game-title">
+        <div class="game-topline">
+          <div><p class="eyebrow red">Hidden lawn mission</p><h2 id="hidden-game-title">Make clean passes across the lawn.</h2></div>
+          <div class="game-scoreboard" aria-label="Game score"><span>LAWN CUT <strong id="game-score">0%</strong></span><span>TIME <strong id="game-time">90</strong></span></div>
+        </div>
+        <div class="game-board-wrap">
+          <canvas id="mowing-game" class="mission-game-canvas" width="960" height="510" aria-label="3D Virginia Beach lawn mowing game. Use W and S to drive the mower and A and D to steer. Cut the tall grass into neat stripes.">Your browser does not support this game canvas.</canvas>
+        </div>
+        <div class="game-controls">
+          <div class="keyboard-guide" aria-label="Keyboard controls"><span class="keycap">W</span><span class="keycap">A</span><span class="keycap">S</span><span class="keycap">D</span><span>Drive and steer the mower</span></div>
+          <button id="game-start" class="primary-button" type="button">Start mission <span aria-hidden="true">→</span></button>
+        </div>
+        <p id="game-status" class="game-status" role="status" aria-live="polite">Press Start mission, then use WASD to mow clean stripes into the lawn.</p>
+      </section>
+    </section>
+  </div>
+
   <script src="vendor/maplibre-gl.js?v=5.24.0"></script>
-  <script src="app.js?v=20261023b"></script>
+  <script src="app.js?v=20261025b"></script>
+  <script src="minigame.js?v=20261025b"></script>
 </body>
 </html>
